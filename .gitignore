@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Generated analysis output (regenerate with: python movie_analytics.py)
+output/charts/*.png
+output/reports/*.csv
+output/reports/*.txt
+
+# User uploads
+uploads/*
+!uploads/.gitkeep
+
+# Logs & misc
+run_log.txt
+*.log
+.DS_Store
+Thumbs.db

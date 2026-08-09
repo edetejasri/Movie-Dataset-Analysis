@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Analytics Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-inner">
+            <h1>Movie Analytics Dashboard</h1>
+            <span class="dataset-badge" id="datasetBadge">movies.csv</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- KPI Cards -->
+        <section class="kpi-grid" aria-label="Key metrics">
+            <div class="kpi-card">
+                <span class="kpi-label">Total Movies</span>
+                <span class="kpi-value" id="kpiTotal">--</span>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-label">Average Rating</span>
+                <span class="kpi-value" id="kpiAvgRating">--</span>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-label">Highest Rating</span>
+                <span class="kpi-value" id="kpiMaxRating">--</span>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-label">Most Popular Genre</span>
+                <span class="kpi-value kpi-genre" id="kpiGenre">--</span>
+            </div>
+        </section>
+
+        <!-- Upload + Search / Filters -->
+        <section class="toolbar card">
+            <div class="upload-box">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <label class="file-label">
+                        Upload your own CSV
+                        <input type="file" name="file" accept=".csv" id="fileInput" />
+                    </label>
+                    <button type="submit" class="btn btn-primary">Analyze CSV</button>
+                    <button type="button" class="btn btn-ghost" id="resetBtn">Use sample data</button>
+                </form>
+                <p class="upload-status" id="uploadStatus"></p>
+            </div>
+
+            <div class="filters">
+                <input type="search" id="searchInput" placeholder="Search movie..." />
+                <select id="genreFilter" title="Genre filter">
+                    <option value="">All genres</option>
+                </select>
+                <input type="number" id="minRating" placeholder="Min rating" min="0" max="10" step="0.1" />
+                <input type="number" id="maxRating" placeholder="Max rating" min="0" max="10" step="0.1" />
+                <button type="button" class="btn btn-primary" id="applyFilters">Apply</button>
+            </div>
+        </section>
+
+        <!-- Insights -->
+        <section class="card insights" id="insightsSection">
+            <h2>Automatic Insights</h2>
+            <ul id="insightsList"></ul>
+        </section>
+
+        <!-- Charts -->
+        <section class="chart-grid">
+            <div class="card chart-card">
+                <h2>Rating Distribution</h2>
+                <img id="chartRatingDistribution" class="chart-img" alt="Rating distribution chart" />
+            </div>
+            <div class="card chart-card">
+                <h2>Top Rated Movies</h2>
+                <img id="chartTopRated" class="chart-img" alt="Top rated movies chart" />
+            </div>
+            <div class="card chart-card">
+                <h2>Popular Genres</h2>
+                <img id="chartPopularGenres" class="chart-img" alt="Popular genres chart" />
+            </div>
+            <div class="card chart-card">
+                <h2>Genre Rating Comparison</h2>
+                <img id="chartGenreRating" class="chart-img" alt="Average rating by genre chart" />
+            </div>
+            <div class="card chart-card">
+                <h2>Movie Release Trend</h2>
+                <img id="chartReleaseTrend" class="chart-img" alt="Movies released by year chart" />
+            </div>
+            <div class="card chart-card">
+                <h2>Popularity Analysis</h2>
+                <img id="chartRatingVsPopularity" class="chart-img" alt="Rating vs popularity chart" />
+            </div>
+            <div class="card chart-card" id="votesCard" style="display:none;">
+                <h2>Vote Analysis</h2>
+                <img id="chartRatingVsVotes" class="chart-img" alt="Rating vs vote count chart" />
+            </div>
+        </section>
+
+        <!-- Data tables -->
+        <section class="table-grid">
+            <div class="card table-card">
+                <h2>Top 10 Highest-Rated Movies</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Rating</th>
+                                <th>Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="topRatedTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-card">
+                <h2>Popular Genres</h2>
+                <ul id="genreList" class="genre-list"></ul>
+            </div>
+        </section>
+
+        <!-- Search results -->
+        <section class="card table-card" id="searchResultsSection" style="display:none;">
+            <h2>Movie Search Results <span id="searchCount" class="muted"></span></h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Rating</th>
+                            <th>Genres</th>
+                            <th>Year</th>
+                            <th>Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchTable"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <p>Movie Data Analytics Platform &mdash; built with Python, Pandas, NumPy, Matplotlib &amp; Seaborn.</p>
+        </footer>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

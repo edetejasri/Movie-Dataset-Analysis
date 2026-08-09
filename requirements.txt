@@ -1,0 +1,16 @@
+# Movie Data Analytics Platform - dependencies
+#
+# Versions below are tested against Python 3.6 (the tested environment).
+# On Python 3.8+ you can install the latest versions instead:
+#   pip install pandas numpy matplotlib seaborn flask
+#
+# Core data stack
+numpy==1.19.5
+pandas==1.1.5
+matplotlib==3.3.4
+seaborn==0.11.2
+scipy==1.5.4
+
+# Web backend
+Flask==2.0.3
+Werkzeug==2.0.3
